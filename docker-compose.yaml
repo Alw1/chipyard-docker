@@ -1,0 +1,24 @@
+services:
+  chipyard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: chipyard-dev:latest
+    container_name: chipyard-dev
+    
+    volumes:
+      - ./chipyard:/chipyard
+      
+      # Mount SSH keys and git config
+      - ~/.ssh:/root/.ssh:ro
+      - ~/.gitconfig:/root/.gitconfig:ro
+      
+      # Optional configs to pull into the container
+      - ~/.zshrc:/root/.zshrc:ro
+      - ~/.config/nvim:/root/.config/nvim:ro
+      - ~/.tmux.conf:/root/.tmux.conf:ro
+    
+    working_dir: /chipyard
+    
+    stdin_open: true
+    tty: true
